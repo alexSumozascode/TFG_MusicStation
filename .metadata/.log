@@ -1,0 +1,21 @@
+!SESSION 2022-10-08 14:08:19.262 -----------------------------------------------
+eclipse.buildId=Version 1.8.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-10-08 14:08:58.564
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-10-08 14:08:58.641
+!MESSAGE Log4j initialized with config file C:\Users\asumo\OneDrive\Documentos\GithubRepositories\TFG_MusicStation\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-10-08 14:09:00.578
+!MESSAGE Started RMI Server, listening on port 41338
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-10-08 14:10:06.551
+!MESSAGE Indexed 'mainBuild_V3.6' (21 sources, 81 headers) in 2.58 sec: 4,402 declarations; 18,229 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0088%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.launch 2 0 2022-10-08 14:19:45.837
+!MESSAGE Won't launch debug session since we failed to locate the binary.
