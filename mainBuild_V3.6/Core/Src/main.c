@@ -22,11 +22,15 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd_development.h"
+
+#include "stdbool.h"
+#include "string.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+#define DESFASE_ASCI 48
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -75,10 +79,10 @@ int main(void)
 
   /* USER CODE BEGIN Init */
   lcd_init();
+  initKeyPad();
   /* USER CODE END Init */
 
   /* Configure the system clock */
-
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
@@ -97,20 +101,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		char key = 1;// readKeyPad();
-		while (key!=111){
-		lcd_send_cmd(LCD_BLINK_ON);
-
-		lcd_send_string("1-->lcd semidone ",true);
-	    HAL_GPIO_TogglePin(GPIOD,LD4_Pin);
-	    HAL_Delay(5000);
-		}
-	    //HAL_Delay(5000);
-	   //LCD_displayONOFF(1);
-	    //HAL_Delay(5000);
-	    //LCD_displayONOFF(0);
 
     /* USER CODE BEGIN 3 */
+
+	char a = readKeyPad();
+	if (a!=111){
+		char mensaje[27] = "Ha selecionado la tecla: ";
+		strncat(mensaje, &a, 1);
+		lcd_send_string (mensaje,true);
+	}
   }
   /* USER CODE END 3 */
 }
@@ -210,10 +209,20 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, ROW1_Pin|ROW2_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, ROW3_Pin|ROW4_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : ROW1_Pin ROW2_Pin */
+  GPIO_InitStruct.Pin = ROW1_Pin|ROW2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -221,12 +230,30 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PA2 */
-  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  /*Configure GPIO pins : ROW3_Pin ROW4_Pin */
+  GPIO_InitStruct.Pin = ROW3_Pin|ROW4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : COL1_Pin COL2_Pin */
+  GPIO_InitStruct.Pin = COL1_Pin|COL2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : COL3_Pin */
+  GPIO_InitStruct.Pin = COL3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(COL3_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : COL4_Pin */
+  GPIO_InitStruct.Pin = COL4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(COL4_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LD4_Pin LD3_Pin LD5_Pin LD6_Pin */
   GPIO_InitStruct.Pin = LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin;
