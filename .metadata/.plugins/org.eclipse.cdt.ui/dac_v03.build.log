@@ -1,0 +1,10 @@
+10:28:32 **** Incremental Build of configuration Debug for project dac_v03 ****
+make -j8 all 
+arm-none-eabi-size   dac_v03.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29172	    152	   3552	  32876	   806c	dac_v03.elf
+Finished building: default.size.stdout
+ 
+
+10:28:32 Build Finished. 0 errors, 0 warnings. (took 222ms)
+

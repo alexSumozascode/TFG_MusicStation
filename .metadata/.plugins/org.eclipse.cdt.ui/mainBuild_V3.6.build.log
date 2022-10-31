@@ -1,6 +1,29 @@
-15:18:44 **** Incremental Build of configuration Debug for project mainBuild_V3.6 ****
+13:25:36 **** Incremental Build of configuration Debug for project mainBuild_V3.6 ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:60: warning: "PI" redefined
+   60 | #define PI 3.14159264f
+      | 
+In file included from ../Core/Inc/lcd_development.h:16,
+                 from ../Core/Src/main.c:24:
+../Core/Inc/auxfunc_development.h:15: note: this is the location of the previous definition
+   15 | #define PI 3.14159265
+      | 
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:3: warning: implicit declaration of function 'initKeyPad' [-Wimplicit-function-declaration]
+  106 |   initKeyPad();
+      |   ^~~~~~~~~~
+../Core/Src/main.c:158:11: warning: implicit declaration of function 'readKeyPad' [-Wimplicit-function-declaration]
+  158 |  char a = readKeyPad();
+      |           ^~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/main.c: At top level:
+../Core/Inc/MY_CS43L22.h:66:13: warning: 'write_register' declared 'static' but never defined [-Wunused-function]
+   66 | static void write_register(uint8_t reg, uint8_t *data);
+      |             ^~~~~~~~~~~~~~
+../Core/Inc/MY_CS43L22.h:67:13: warning: 'read_register' declared 'static' but never defined [-Wunused-function]
+   67 | static void read_register(uint8_t reg, uint8_t *data);
+      |             ^~~~~~~~~~~~~
 arm-none-eabi-gcc -o "mainBuild_V3.6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\asumo\OneDrive\Documentos\GithubRepositories\TFG_MusicStation\mainBuild_V3.6\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mainBuild_V3.6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: mainBuild_V3.6.elf
  
@@ -8,7 +31,7 @@ arm-none-eabi-size   mainBuild_V3.6.elf
 arm-none-eabi-objdump -h -S  mainBuild_V3.6.elf  > "mainBuild_V3.6.list"
 arm-none-eabi-objcopy  -O binary  mainBuild_V3.6.elf  "mainBuild_V3.6.bin"
    text	   data	    bss	    dec	    hex	filename
-   9224	     20	   1660	  10904	   2a98	mainBuild_V3.6.elf
+  27932	     68	   2120	  30120	   75a8	mainBuild_V3.6.elf
 Finished building: default.size.stdout
  
 Finished building: mainBuild_V3.6.bin
@@ -16,5 +39,5 @@ Finished building: mainBuild_V3.6.bin
 Finished building: mainBuild_V3.6.list
  
 
-15:18:45 Build Finished. 0 errors, 0 warnings. (took 1s.759ms)
+13:25:37 Build Finished. 0 errors, 5 warnings. (took 722ms)
 
